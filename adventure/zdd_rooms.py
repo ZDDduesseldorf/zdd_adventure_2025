@@ -17,20 +17,38 @@ class ToiletCellar(Room):
     
 
 class GamingRoom(Room):
+
+    florians_laptop = Item(
+            "Florian's laptop",
+            "A laptop with a sticker 'Property of Florian'. It looks intact but won't turn on.",
+            movable=False  
+        )
+        
+    other_laptops = Item(
+            "pile of laptops",
+            "A stack of various student laptops. Most have dead batteries or broken screens.",
+            movable=False
+        )
+        
      
     def run_story(self, user_items):
+
+        # What happens when the room is visited once
+
         if self.visited == 1:
             print("\nDozens of laptops line the metal shelves.")
             print("Some are neatly organized, others thrown in hastily during the evacuation.")
             print("One laptop on the main desk catches your eye - it has a name tag: 'FLORIAN'")
+
+        # # What happens when the room is visited twice
         
         elif self.visited >= 2:
             print("\nThe laptop storage room. Florian's laptop sits on the desk.")
         
         
-        has_charger = any(item.name == "laptop charger" for item in user_items)
-        self.laptop_checked = False
-        self.laptop_charged = False
+        has_charger = any(item.name == "laptop charger" for item in user_items) # checks if the player has / has found the laptop charger 
+        self.laptop_checked = False # Determines if the user has openned Florian's laptop or not
+        self.laptop_charged = False # Dertermines if Florian's laptop is charged
         
         
         if not self.laptop_checked:
@@ -81,6 +99,8 @@ class GamingRoom(Room):
         
         return user_items
     
+    # Congratulation message when the laptop is being checked wehen fully charged
+    
     def _charge_laptop(self, user_items):
         print("\n" + "="*60)
         print("You plug the charger into the wall socket and connect it to the laptop.")
@@ -123,11 +143,17 @@ class GamingRoom(Room):
             movable=False
         )
         user_items.append(solution)
+# Laptop charger item
+laptop_charger = Item(
+    "laptop charger",
+    "A universal laptop charger with multiple adapter tips. Still warm.",
+    movable=True
+)
 
 
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
-toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
+toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.", laptop_charger)
 gaming_room = GamingRoom('Gaming Room', 'The perfect room to relax and make researches')
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
