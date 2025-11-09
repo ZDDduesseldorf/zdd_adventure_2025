@@ -19,6 +19,23 @@ class ToiletCellar(Room):
 class GamingRoom(Room):
      
     def run_story(self, user_items):
+
+        self.laptop_checked = False
+        self.laptop_charged = False
+
+        self.florians_laptop = Item(
+            "Florian's laptop",
+            "A laptop with a sticker 'Property of Florian'. It looks intact but won't turn on.",
+            movable=False  
+        )
+        
+        self.other_laptops = Item(
+            "pile of laptops",
+            "A stack of various student laptops. Most have dead batteries or broken screens.",
+            movable=False
+        )
+     
+        
         if self.visited == 1:
             print("\nDozens of laptops line the metal shelves.")
             print("Some are neatly organized, others thrown in hastily during the evacuation.")
@@ -29,8 +46,7 @@ class GamingRoom(Room):
         
         
         has_charger = any(item.name == "laptop charger" for item in user_items)
-        self.laptop_checked = False
-        self.laptop_charged = False
+        
         
         
         if not self.laptop_checked:
@@ -124,10 +140,15 @@ class GamingRoom(Room):
         )
         user_items.append(solution)
 
+laptop_charger = Item(
+    "laptop charger",
+    "A universal laptop charger with multiple adapter tips. Still warm.",
+    movable=True)
+
 
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
-toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
+toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.", laptop_charger)
 gaming_room = GamingRoom('Gaming Room', 'The perfect room to relax and make researches')
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
