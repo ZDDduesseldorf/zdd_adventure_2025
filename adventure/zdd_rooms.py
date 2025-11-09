@@ -23,6 +23,8 @@ class GamingRoom(Room):
         self.laptop_checked = False
         self.laptop_charged = False
 
+        # Items of the room (florian's laptop and othe laptops)
+
         self.florians_laptop = Item(
             "Florian's laptop",
             "A laptop with a sticker 'Property of Florian'. It looks intact but won't turn on.",
@@ -35,12 +37,15 @@ class GamingRoom(Room):
             movable=False
         )
      
-        
+        # When the room is visited once
+
         if self.visited == 1:
             print("\nDozens of laptops line the metal shelves.")
             print("Some are neatly organized, others thrown in hastily during the evacuation.")
             print("One laptop on the main desk catches your eye - it has a name tag: 'FLORIAN'")
         
+        # When the room is visited twice
+
         elif self.visited >= 2:
             print("\nThe laptop storage room. Florian's laptop sits on the desk.")
         
@@ -48,7 +53,8 @@ class GamingRoom(Room):
         has_charger = any(item.name == "laptop charger" for item in user_items)
         
         
-        
+        # When player does check the room
+
         if not self.laptop_checked:
             print("\nFlorian's laptop sits on the desk, closed.")
             while True:
@@ -60,6 +66,8 @@ class GamingRoom(Room):
                     print("Nothing happens. The battery must be dead.")
                     self.laptop_checked = True
                     
+                    # The room has been checked, Florian's laptop found and also checked and player has charger
+
                     if has_charger:
                         print("\n Wait! You have a laptop charger in your inventory!")
                         self._charge_laptop(user_items)
@@ -96,6 +104,8 @@ class GamingRoom(Room):
             print("You can refer back to it anytime you're in this room.")
         
         return user_items
+    
+    # Little Congratulation message when the laptop has been plugged
     
     def _charge_laptop(self, user_items):
         print("\n" + "="*60)
@@ -139,6 +149,8 @@ class GamingRoom(Room):
             movable=False
         )
         user_items.append(solution)
+
+# Item laptop charger
 
 laptop_charger = Item(
     "laptop charger",
