@@ -33,9 +33,7 @@ class ZDDAdventure:
         third_floor.add_connection("down", second_floor)
 
         # Define rooms in each floor
-        analog_book = Item("old book", "a real book made of paper", movable=True)
-        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
-        cellar.add_room("archive", archive_room)
+        cellar.add_room("archive", ALL_ROOMS["archive"])
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
 
         # -------------------------------

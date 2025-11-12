@@ -51,10 +51,34 @@ class Balcony(Room):
 
         return user_items
 
+
+class Archive(Room):
+    def run_story(self, user_items):
+        # Prüfen ob der Spieler die Taschenlampe im Inventar hat
+        has_flashlight = False
+        for item in user_items:
+            if item.name == "Flashlight":
+                has_flashlight = True
+                break # Sobald wir sie gefunden haben können wir aufhören zu suchen
+
+        if has_flashlight:
+            print("You enter the archive. It's pitch black...")
+            print("...but you switch on your new FLASHLIGHT! Now you can see.")
+            print("Old records and dusty books everywhere.")
+
+            # WICHTIG ist, Erlaube dem Raum, die Items normal anzuzeigen, indem wir die originale run_story-Methode aufrufen
+            return super().run_story(user_items)
+        else:
+            print("You enter the archive. It's pitch black. You can't see a thing.")
+            print("Maybe you can find a light source somewhere?")
+
+            return user_items
+
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
 balcony = Balcony("balcony", "A windy balcony on the top floor.")
+archive = Archive("archive", "Old records and dusty books everywhere.")
 
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
@@ -62,7 +86,8 @@ balcony = Balcony("balcony", "A windy balcony on the top floor.")
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
-    "balcony": balcony
+    "balcony": balcony,
+    "archive": archive
     # Add your room key-value pairs here:
     # "my_room_key": my_room
 }
