@@ -35,9 +35,14 @@ class ZDDAdventure:
         # Define rooms in each floor
         analog_book = Item("old book", "a real book made of paper", movable=True)
         archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        blueprint = Item("3d printer blueprint", "A detailed technical blueprint for a complex 3D printer. It shows some advanced mechanisms.",
+                         movable= True)
+        printer_lab = Room("3d printer lab", "A small lab with humming 3D printers.", blueprint)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
-
+        first_floor.add_room("3d printer lab", ALL_ROOMS["printer_lab"])
+        
+        
         # -------------------------------
         # ... Add other rooms ...
 
