@@ -16,6 +16,7 @@ class ZDDAdventure:
     def create_floors(self):
         # Define the floors
         cellar = Floor("cellar", "It's a bit chilly here. The only light is coming from the emergency lights.")
+        cellar.add_room("secret", ALL_ROOMS["secret_room"])
         ground_floor = Floor("ground floor", "You see a open working space with all kind of stuff standing around... weird.")
         first_floor = Floor("first floor", "There are many doors. Study rooms, offices, and labs.")
         second_floor = Floor("second floor", "This floor hosts the professors' offices and some research labs.")
