@@ -1,5 +1,5 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room
+from main_classes import Room, Item
 
 
 class ToiletCellar(Room):
@@ -43,17 +43,17 @@ class BallPitRoom(Room):
                 continue
 
             if action == "leave":
-                print("You climb out of the Ball Print Room...")
+                print("You climb out of the Ball Pit Room...")
                 return user_items
             
             elif action == "jump in":
-                print("You take a running start and jump straight into the ball print")
+                print("You take a running start and jump straight into the ball pit")
 
             elif action == "search balls":
                 if not item_found:
                     print("You search colorful plastic balls...")
                     print("Something catches your eye")
-                    uno = item(
+                    uno = Item(
                         "UNO Reverse Card",
                         "A card hidden deep inside the ball pit.",
                         movable = True
