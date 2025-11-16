@@ -19,6 +19,15 @@ class ToiletCellar(Room):
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
 
 # -----------------------------------------------------------
+class BallPitRoom(Room):
+    def run_story(self, user_items):
+        if self.visited == 1:
+            print("You enter the cellar... the entire floor is a giant Ball Pit.")
+            print("Colorful plastics balls stretch out like an ocean.")
+            print("You feel like this room is meant as a silly little side quest.")
+        else:
+            print("You step back into the Ball Pit Room. The plastics balls shift around you.")
+        return user_items
 # Add YOUR ROOM instance here, similar to the example below:
 # my_room = MyRoom("room_name", "room_description")
 
