@@ -28,6 +28,9 @@ class WalkInCloset(Room):
                 print(f"You leave the {self.name}.")
                 return user_items
             
+            elif action == "inspect outfits":
+                print("Various clothes are hanging around.")
+            
             elif action == "inspect shelves":
                 print("Shelves filled with bags, boxes and accessories.")
 
