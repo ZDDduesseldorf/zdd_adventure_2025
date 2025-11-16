@@ -15,23 +15,23 @@ class ToiletCellar(Room):
 
 class CoffeeKitchen(Room):
     def run_story(self, user_items):
-        print("You are in the Coffee kitchen!")
-        while True:
+        print("You are in the Coffee kitchen!")  #appears each time you enter
+        while True:  #This loop will enable actions to be carried out in teh coffee kitchen
          user_action= input("Do you want to do some inspections? If yes, choose an option. a)Coffee machine b)Drawer c)Wall d)Leave ")
          if user_action.lower() == "coffee machine":
             print("Good, the coffee machine seems to be completely broken. Not even a single light is on")
             continue
-         elif user_action.lower() == "drawer":
+         elif user_action.lower() == "drawer":  #inspect drawer
             print("Drawer opened!.")
-            if len(self.items) == 0:
+            if len(self.items) == 0:         #counts the number of items in the coffee kitchen. if==0 means drawer is also empty
                print("Oops empty!")
             else:
              user_action_2=input("OOh, here is a small usb stick. Do you want to take it? (yes/no)")
              if user_action_2.lower()== "yes":
               for item in self.items:
-                if item.name.lower()== "mysterious usb stick":
-                   user_items.append(item)
-                   self.items.remove(item)
+                if item.name.lower()== "mysterious usb stick":     #if the name of item in drawer== ...
+                   user_items.append(item)                         #Add in inventory list
+                   self.items.remove(item)                         #delete from coffee kitchen
                    print("USB Stick picked up!")
              else:
                print("okay.")
@@ -59,7 +59,9 @@ toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
 
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
-coffee_kitchen = CoffeeKitchen("coffee kitchen", "A small, slightly messy coffee kitchen. The main feature is a broken, high-tech coffee machine.")
+#New item in Coffe kitchen
+usb_stick= Item("mysterious usb stick", "Its purpose is to be used in another location. For example, if the player has the Mysterious USB Stick in their inventory, they can use stick or inspect computer in the AI Lab to unlock a new clue, solve a puzzle, or gain access to a new area",True) 
+coffee_kitchen = CoffeeKitchen("coffee kitchen", "A small, slightly messy coffee kitchen. The main feature is a broken, high-tech coffee machine.", items_init=[usb_stick])
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
