@@ -26,6 +26,7 @@ class ZDDAdventure:
         cellar.add_connection("up", ground_floor)
         ground_floor.add_connection("down", cellar)
         ground_floor.add_connection("up", first_floor)
+        first_floor.add_room("closet", ALL_ROOMS["walk_in_closet"])
         first_floor.add_connection("down", ground_floor)
         first_floor.add_connection("up", second_floor)
         second_floor.add_connection("down", first_floor)
