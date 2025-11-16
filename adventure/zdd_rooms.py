@@ -9,7 +9,8 @@ fallen_key = Item(
 class WalkInCloset(Room):
     def run_story(self, user_items):
         print("You enter the room, when you suddendly trip over a pair of shoes.")
-        print("")
+        if self.visited == 1:
+            self.items.append(fallen_key)
         return user_items
 
     def enter_room(self,user_items,command_handler):
@@ -28,11 +29,16 @@ class WalkInCloset(Room):
                 print(f"You leave the {self.name}.")
                 return user_items
             
+            elif action == "inspect outfits":
+                print("Various clothes are hanging around.")
+
             elif action == "inspect shelves":
                 print("Shelves filled with bags, boxes and accessories.")
 
-            elif action == "look around":
-                print("A messy closet full of clothes and shoes. Something might be on the floor.")
+            elif action == "look around": 
+                print("A messy closet full of clothes and shoes. Something might be on the floor.") 
+                user_items = self.show_items(user_items)
+
 
             else:
                 print("Unknown command")
