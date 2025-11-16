@@ -28,11 +28,55 @@ class BallPitRoom(Room):
         else:
             print("You step back into the Ball Pit Room. The plastics balls shift around you.")
         return user_items
-# Add YOUR ROOM instance here, similar to the example below:
-# my_room = MyRoom("room_name", "room_description")
+    
+    def enter_room(self, user_items, command_handler):
+        self.visited  += 1
+        user_items = self.run_story(user_items)
+
+        item_found = False
+        while True:
+            action = input (">> 'inspect', 'jump in', 'search balls', 'leave': ").strip().lower()
+
+            if command_handler.handle_global_commands(action):
+                if not command_handler.game.game_active:
+                    return user_items
+                continue
+
+            if action == "leave":
+                print("You climb out of the Ball Print Room...")
+                return user_items
+            
+            elif action == "jump in":
+                print("You take a running start and jump straight into the ball print")
+
+            elif action == "search balls":
+                if not item_found:
+                    print("You search colorful plastic balls...")
+                    print("Something catches your eye")
+                    uno = item(
+                        "UNO Reverse Card",
+                        "A card hidden deep inside the ball pit.",
+                        movable = True
+                    )
+                    self.items.append(uno)
+                    print("You found a UNO Reverse Card!")
+                    item_found = True
+                else:
+                    print("You search again, but find nothing new.")
+
+            elif action == "inspect":
+                user_items = self.show_items(user_items)
+
+            else:
+                print("This room doesn't understand that command. Please try again!")
+                
+ball_pit_room = BallPitRoom(
+    "Ball Pit Room",
+    "A room filled with colorful plastic balls."
+)
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar
     # Add your room key-value pairs here:
-    # "my_room_key": my_room
+    "ball_pit": ball_pit_room
 }
