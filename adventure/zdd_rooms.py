@@ -76,7 +76,7 @@ ball_pit_room = BallPitRoom(
 )
 
 ALL_ROOMS = {
-    "toilet_cellar": toilet_cellar
+    "toilet_cellar": toilet_cellar,
     # Add your room key-value pairs here:
     "ball_pit": ball_pit_room
 }
