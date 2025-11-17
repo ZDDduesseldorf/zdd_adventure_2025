@@ -37,6 +37,8 @@ class ZDDAdventure:
         archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
+        ground_floor.add_room("badminton", ALL_ROOMS["badminton_court"])
+
 
         # -------------------------------
         # ... Add other rooms ...
