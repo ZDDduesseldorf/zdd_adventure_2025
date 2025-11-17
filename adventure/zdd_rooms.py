@@ -27,6 +27,14 @@ class Labyrinth(Room):
 
         if outcome == "treasure":
             print("You found a treasure! +20 bonus points for the stochastic exam!")
+        
+        # EKI
+        print("You also find a sheet of paper with EKI math equations on it.")
+        user_items.append(Item(
+            "EKI paper", "A sheet full of EKI math equations. Might help with the EKI exam.",
+            movable=True
+        ))
+
         else:
             print("You got lost and arrive late for the DSAI final presentation.")
 
