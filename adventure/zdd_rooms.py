@@ -1,5 +1,6 @@
 """This is to keep all special rooms of the ZDD."""
 from main_classes import Room
+from main_classes import Item
 
 
 class ToiletCellar(Room):
@@ -29,14 +30,18 @@ class Labyrinth(Room):
             print("You found a treasure! +20 bonus points for the stochastic exam!")
         
         # EKI
-        print("You also find a sheet of paper with EKI math equations on it.")
-        user_items.append(Item(
-            "EKI paper", "A sheet full of EKI math equations. Might help with the EKI exam.",
-            movable=True
-        ))
+ #           print("You also find a sheet of paper with EKI math equations on it.")
+            
+ #           self.items.append(
+  #              Item("EKI paper", 
+   #                 "A sheet full of EKI math equations. Might help with the EKI exam.",
+    #                movable=True)
+     #       )
 
         else:
             print("You got lost and arrive late for the DSAI final presentation.")
+
+        print("There might be something lying around here...")
 
         return user_items
 
@@ -44,7 +49,13 @@ class Labyrinth(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-Labyrinth = Labyrinth("labyrinth", "A confusing maze with uncertain outcomes.")
+labyrinth = Labyrinth(
+    "labyrinth", 
+    "A confusing maze with uncertain outcomes.",
+    items_init=[Item("EKI paper",
+                    "A sheet full of EKI math equtions. Might help with the EKI exam.",
+                    movable=True)]
+    )
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
 # my_room = MyRoom("room_name", "room_description")
