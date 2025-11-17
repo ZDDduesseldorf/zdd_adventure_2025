@@ -18,26 +18,26 @@ class GamingLounge(Room):
         print("Wow, it's a gaming lounge with a huge TV in the corner!")
         # Check if the user has the switch in their inventory; If switch is present start playing a game.
         if "nintendo_switch" in [x.name for x in user_items]:
-            user_input = input("You have a switch in your inventory. Do you want to play a game?: (y/n) ")
-            if user_input.lower() == "y":
+            user_input = input("You have a switch in your inventory. Do you want to play a game?: (yes/no) ")
+            if user_input.lower() == "yes":
                 play = True
-                # Loop over the game as long as the player answers "y"
+                # Loop over the game as long as the player answers "yes"
                 while play:
                     print("You go to the TV, connect your Nintendo Switch and start playing.")
                     print("This game is super fun! but in the back of your mind, you can’t stop thinking about the portfolio assignment…”)")
-                    new_input = input("Do you want to continue playing?: (y/n) ")
-                    if new_input.lower() == "y":
+                    new_input = input("Do you want to continue playing?: (yes/no) ")
+                    if new_input.lower() == "yes":
                         continue
-                    elif new_input.lower() == "n":
+                    elif new_input.lower() == "no":
                         play = False
                     else:
-                        print("You're unsure and think again. (Answer 'y' or 'n')")
+                        print("You're unsure and think again. (Answer 'yes' or 'no')")
                         
-            elif user_input.lower() == "n":
+            elif user_input.lower() == "no":
                     print("You decide that you don't have time to play right now.")
                     
             else:
-                print("You're unsure and think again. (Answer 'y' or 'n')")
+                print("You're unsure and think again. (Answer 'yes' or 'no')")
 
                     
                 
