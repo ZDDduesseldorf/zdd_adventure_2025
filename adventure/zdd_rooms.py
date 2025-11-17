@@ -17,7 +17,7 @@ class GamingLounge(Room):
     def run_story(self, user_items):
         print("Wow, it's a gaming lounge with a huge TV in the corner!")
         # Check if the user has the switch in their inventory; If switch is present start playing a game.
-        if "nintendo_switch" in [x.name for x in user_items]:
+        if "Nintendo Switch" in [x.name for x in user_items]:
             user_input = input("You have a switch in your inventory. Do you want to play a game?: (y/n) ")
             if user_input.lower() == "y":
                 play = True
@@ -38,6 +38,7 @@ class GamingLounge(Room):
                     
             else:
                 print("You're unsure and think again. (Answer 'y' or 'n')")
+        return user_items
 
                     
                 
