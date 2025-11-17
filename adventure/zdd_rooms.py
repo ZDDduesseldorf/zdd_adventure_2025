@@ -13,24 +13,24 @@ class BadmintonCourt(Room):
         self.correct_sequence = ["serve", "slice", "smash", "clear"]
 
         self.badminton_book = Item(
-        "Badminton Book, Der Trick ist: Serve, Slice, Smash, Clear'", 
-        "Ein kleines Handbuch", 
+        "Badminton Book: The trick is: Serve, Slice, Smash, Clear", 
+        "A small handbook", 
         movable=True
         )
 
         self.golden_shuttlecock = Item(
             "Golden Shuttlecock", 
-            "Ein goldener Federball", 
+            "A golden shuttlecock", 
             movable=True
         )
 
     def enter_room(self, items, command_handler):
         if self.visited == 0:
-            print("Du betrittst den Raum:", self.name)
+            print("You enter the room:", self.name)
             print(self.description)
-            print("Da steht ein Gegner auf einem Feld und starrt dich an.")
+            print("There is an opponent on the court staring at you.")
         else:
-            print("Du bist wieder hier:", self.name)
+            print("You are here again:", self.name)
         self.visited += 1
 
         while True:
@@ -42,47 +42,47 @@ class BadmintonCourt(Room):
                 continue
 
             if action == "leave":
-                print("Du gehst raus.")
+                print("You leave.")
                 return items
 
             if action == "inspect":
-                print("Eine helle Halle mit einem Badmintonfeld, der Gegner schaut dich böse an")
+                print("A bright hall with a badminton court; the opponent glares at you.")
                 if self.enemy_beaten:
-                    print("Er sieht jetzt freundlicher aus.")
+                    print("He looks friendlier now.")
                 elif not self.book_given:
-                    print("Vielleicht fragst du ihn um Hilfe (ask for help).")
+                    print("Maybe ask him for help (ask for help).")
                 continue
 
             if action == "ask for help":
                 if not self.book_given:
-                    print("Hmmmpf, lies das.' Du bekommst ein Buch.")
+                    print("Hmmmpf, read this. You receive a book.")
                     items.append(self.badminton_book)
                     self.book_given = True
                 else:
-                    print("Er sagt: 'Mehr Hilfe kriegst du nicht.'")
+                    print("He says: 'You won't get any more help.'")
                 continue
 
             if action == "play match":
                 if self.enemy_beaten:
-                    print("Er: 'Schon vorbei. Kein neues Spiel.'")
+                    print("He says: 'It's already over. No new game.'")
                     continue
-                print("Okay, dann spielen wir ein Match!")
-                print("Wie willst du spielen? [Serve/Smash/Clear/Slice]")
+                print("Okay, then we'll play a match!")
+                print("How will you play? [Serve/Smash/Clear/Slice]")
                 moves = []
                 for i in range(4):
                     mv = input(f"Schlag {i+1}: ").lower()
                     moves.append(mv)
                 if moves == self.correct_sequence:
-                    print("Du gewinnst! Er gibt dir einen goldenen Federball.")
+                    print("You win! He gives you a golden shuttlecock.")
                     items.append(self.golden_shuttlecock)
                     self.enemy_beaten = True
                 else:
-                    print("Verloren. Falsche Reihenfolge.")
+                    print("Lost. Wrong sequence.")
                     if self.book_given:
-                        print("Vielleicht noch mal ins Buch schauen.")
+                        print("Maybe take another look in the book.")
                 continue
 
-            print("Kenn ich nicht. Versuch was anderes.")
+            print("I don't know that. Try something else.")
 
 class ToiletCellar(Room):
     def run_story(self, user_items):
@@ -99,7 +99,7 @@ class ToiletCellar(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-badminton_court = BadmintonCourt("Badminton Court", "Ein Raum mit nur einem Badmintonfeld und einem Gegner.")
+badminton_court = BadmintonCourt("Badminton Court", "A room with only a badminton court and an opponent.")
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
 # my_room = MyRoom("room_name", "room_description")
