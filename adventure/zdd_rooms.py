@@ -38,6 +38,7 @@ class GamingLounge(Room):
                     
             else:
                 print("You're unsure and think again. (Answer 'yes' or 'no')")
+        return user_items
 
                     
                 
