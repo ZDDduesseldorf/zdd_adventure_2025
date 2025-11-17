@@ -13,17 +13,43 @@ class ToiletCellar(Room):
             return [x for x in user_items if x.name != "old book"]
         return user_items
 
+class FlowerMeadow(Room):
+    def run_story(self, user_items):
+        print("You step into a peaceful indoor meadow.")
+        print("Warm light shines from above, and soft grass covers the floor.")
+        print("The whole place feels calming and quiet.")
+        return user_items
+    
+    def show_items(self, user_items):
+        print("You kneel down next to the Radiant Flower...")
+
+        choice = input("Do you want to take the flower? (yes/no)").strip().lower()
+            
+
+        if choice == "no":
+          print("good choice")
+          return user_items
+        
+        else:
+          print("as you reach out to pick it up, the flower suddenly SNAPS at your hand!")
+          print("You jump back and look down at your hand...")
+          print("it's GONE!")
+          print("next time, maybe don't pick random plants, hm?")
+
+          return user_items
 
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
+flower_meadow_room = FlowerMeadow("flower meadow", "A calming indoor meadow filled with warm light and soft grass.")
+
 
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
 # my_room = MyRoom("room_name", "room_description")
 
 ALL_ROOMS = {
-    "toilet_cellar": toilet_cellar
+    "toilet_cellar": toilet_cellar,
     # Add your room key-value pairs here:
-    # "my_room_key": my_room
+    "flower_meadow": flower_meadow_room,
 }
