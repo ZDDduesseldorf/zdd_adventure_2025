@@ -1,5 +1,5 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room, Item
+from main_classes import Room
 
 
 class ToiletCellar(Room):
@@ -12,7 +12,6 @@ class ToiletCellar(Room):
             # Remove book from inventory
             return [x for x in user_items if x.name != "old book"]
         return user_items
-
 class YourRoom(Room):
     def run_story(self, user_items):
         print("You enter your room. It's calm... but something feels off.")
