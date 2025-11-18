@@ -1,5 +1,5 @@
 from main_classes import CommandHandler, Item, Floor, Room, UI
-from zdd_rooms import ALL_ROOMS
+from zdd_rooms import ALL_ROOMS, usb_debug_key
 
 EXIT_COMMAND = "exit"
 
@@ -34,7 +34,7 @@ class ZDDAdventure:
 
         # Define rooms in each floor
         analog_book = Item("old book", "a real book made of paper", movable=True)
-        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        archive_room = Room("archive", "Old records and dusty books everywhere.", [analog_book, usb_debug_key])
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
 
@@ -103,6 +103,26 @@ class ZDDAdventure:
                 if next_room:
                     self.current_room = next_room
                     self.items = self.current_room.enter_room(self.items, self.command_handler)
+
+                    # Added the blinking function for IT-rooms
+                    has_key = False
+                    for item in self.items:
+                        if item.name == "USB Debug Key":
+                            has_key = True
+                            break
+
+                    is_tech_room = False
+                    tech_words = ["lab", "server", "machine", "archive"]
+                    room_name_lower = self.current_room.name.lower()
+
+                    for word in tech_words:
+                        if word in room_name_lower:
+                            is_tech_room = True
+                            break
+
+                    if has_key and is_tech_room:
+                        print("Your USB Debug Key starts blinking... It looks like it wants to connect to something here.")
+
                 else:
                     print("There is no such room...")
                 continue
