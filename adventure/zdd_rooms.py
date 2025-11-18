@@ -1,5 +1,5 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room
+from main_classes import Item, Room
 
 
 class ToiletCellar(Room):
@@ -68,6 +68,17 @@ class ArchiveWithSecret(Room):
         print("You inspect the archive… old folders, dust… and a LARGE BOOKSHELF?")
         print("You pull it slightly… A secret door opens to the FORGOTTEN STUDY!")
         return super().show_items(user_items)
+    
+# ---------------- NEW ITEM FOR ISSUE 103 -------------------
+CHEAT_SHEET = Item(
+    name="exam cheat sheet",
+    description=(
+        "A crumpled paper full of desperate last-minute notes. "
+        "It reads: 'The final boss is weak against good code structure!'"
+    ),
+    movable=True
+)
+# -----------------------------------------------------------
 
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
