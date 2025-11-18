@@ -17,7 +17,7 @@ class ZDDAdventure:
         # Define the floors
         cellar = Floor("cellar", "It's a bit chilly here. The only light is coming from the emergency lights.")
         ground_floor = Floor("ground floor", "You see a open working space with all kind of stuff standing around... weird.")
-        first_floor = Floor("first floor", "There are many doors. Study rooms, offices, and labs.")
+        first_floor = Floor("first floor", "There are many doors. Study rooms, offices, and labs. As you look down the hallway, you notice one of the wall panels seems slightly loose and out of place.")
         second_floor = Floor("second floor", "This floor hosts the professors' offices and some research labs.")
         third_floor = Floor("third floor", "This is the topmost floor with the lecture hall and a meeting room. You have heard about a roof terrace, but that might just be stories...")
         # roof_floor = Floor("roof", "You really shouldn't be here!!!")
