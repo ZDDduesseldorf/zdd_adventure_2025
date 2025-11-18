@@ -40,6 +40,8 @@ class ZDDAdventure:
 
         # -------------------------------
         # ... Add other rooms ...
+        second_floor.add_room("infinite_library", ALL_ROOMS["infinite_library"])
+        
 
         return {
             "cellar": cellar,
