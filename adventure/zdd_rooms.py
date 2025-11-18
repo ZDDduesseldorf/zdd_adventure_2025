@@ -5,13 +5,15 @@ from main_classes import Room, Item
 class ToiletCellar(Room):
     def run_story(self, user_items):
         print("What did you expect? It's a toilet.")
-        # Check by name; if the book is present, drop it (story event)
         if "old book" in [x.name for x in user_items]:
-            print("While you wash your hands, the book slips out of your backpack ...right into the water.")
+            print(
+                "While you wash your hands, the book slips out of your backpack "
+                "...right into the water."
+            )
             print("You decide that it wasn't that important after all.")
-            # Remove book from inventory
             return [x for x in user_items if x.name != "old book"]
         return user_items
+
 
 class Scentlab(Room):
     def run_story(self, user_items):
@@ -23,21 +25,22 @@ class Scentlab(Room):
             perfume = Item(
                 name="experimental perfume bottle",
                 description="A shimmering pink perfume bottle. The scent keeps shifting.",
-                movable=True
+                movable=True,
             )
             self.items.append(perfume)
-
         else:
             print()
         return user_items
-    
+
     def enter_room(self, user_items, command_handler):
         self.visited += 1
         print("You step into the Scentlab.")
         user_items = self.run_story(user_items)
 
         while True:
-            action = input(">> smell perfumes / inspect shelves / inspect perfume / leave: ").strip().lower()
+            action = input(
+                ">> smell perfumes / inspect shelves / inspect perfume / leave: "
+            ).strip().lower()
             if command_handler.handle_global_commands(action):
                 return user_items
             if action == "leave":
@@ -54,23 +57,49 @@ class Scentlab(Room):
                     for item in self.items:
                         print(item.description)
                         if item.movable:
-                            take = input(">> Do you want to take the perfume bottle? (yes/no): ").strip().lower()
-                            if take == "yes": 
+                            take = input(
+                                ">> Do you want to take the perfume bottle? (yes/no): "
+                            ).strip().lower()
+                            if take == "yes":
                                 user_items.append(item)
                                 self.items.remove(item)
                                 print("You took the perfume bottle.")
                             else:
                                 print("You decided to leave the perfume bottle.")
-            else: 
+            else:
                 print("Unknown Command.")
-            
-        
+
+
+# -----------------------------------------------------------
+# ------------------- New item: Laptop ----------------------
+# -----------------------------------------------------------
+
+laptop = Item(
+    name="laptop",
+    description=(
+        "A laptop sitting on the table, used to build the ZDDAdventure project. "
+        "Interacting with the laptop shows the homework you are supposed to do "
+        "for the ZDDAdventure project."
+    ),
+    movable=False,
+)
+
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
-toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
+# -----------------------------------------------------------
+
+toilet_cellar = ToiletCellar(
+    "toilet",
+    "Yes, even the cellar has a toilet.",
+    items_init=[laptop],
+)
+
+scent_lab = Scentlab(
+    "Scent Lab",
+    "A small lab filled with glowing perfume bottles and mysterious scents.",
+)
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
-    "scent_lab": scent_lab
+    "scent_lab": scent_lab,
 }
