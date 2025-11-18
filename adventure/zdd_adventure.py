@@ -3,7 +3,6 @@ from zdd_rooms import ALL_ROOMS
 
 EXIT_COMMAND = "exit"
 
-
 class ZDDAdventure:
     def __init__(self):
         self.items = []
@@ -37,6 +36,8 @@ class ZDDAdventure:
         archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
+        first_floor.add_room("security room", ALL_ROOMS["securityroom_first"])
+
 
         # -------------------------------
         # ... Add other rooms ...
