@@ -40,6 +40,9 @@ class ZDDAdventure:
 
         # -------------------------------
         # ... Add other rooms ...
+        # Add the Endless Room to the Second Floor (Issue #110)
+        # Player command: enter loop
+        second_floor.add_room("loop", ALL_ROOMS["endless_room_key"])
 
         return {
             "cellar": cellar,
