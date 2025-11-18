@@ -26,6 +26,7 @@ class ZDDAdventure:
         cellar.add_connection("up", ground_floor)
         ground_floor.add_connection("down", cellar)
         ground_floor.add_connection("up", first_floor)
+        ground_floor.add_room("gravity_lab", ALL_ROOMS["gravity_lab"])
         first_floor.add_connection("down", ground_floor)
         first_floor.add_connection("up", second_floor)
         second_floor.add_connection("down", first_floor)
@@ -33,9 +34,20 @@ class ZDDAdventure:
         third_floor.add_connection("down", second_floor)
 
         # Define rooms in each floor
-        analog_book = Item("old book", "a real book made of paper", movable=True)
-        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        archive_room = Room(
+    "archive",
+    "Old records and dusty books everywhere."
+)
+
+        grabber_arm = Item(
+    "Grabber Arm",
+    "A mechanical grabber arm. Useful for reaching distant objects.",
+        movable=True
+)
+        archive_room.items.append(grabber_arm)
+
         cellar.add_room("archive", archive_room)
+
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
 
         # -------------------------------
