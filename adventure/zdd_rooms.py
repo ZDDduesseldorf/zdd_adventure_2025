@@ -1,12 +1,20 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room
+from main_classes import Room, Item
 import random
 
-# issue #44 Note: The sheet is part of the toilet
-# it's not an item that is movable, it's part of the room
-# -----------------------------------------------------------
 
 class ToiletCellar(Room):
+    def __init__(self, name, description):
+        super().__init__(name, description)
+        # issue #44: Initialize password and sheet as Item
+        self.password = f"{random.randint(10000, 99999)}"
+        self.password_sheet = Item(
+            "password sheet",
+            f"A paper towel with numbers: {self.password}",
+            movable=False
+        )
+        self.sheet_available = True
+    
     def run_story(self, user_items):
         print("What did you expect? It's a toilet.")
         # Check by name; if the book is present, drop it (story event)
@@ -27,7 +35,7 @@ class ToiletCellar(Room):
             
             action = input("Pull out a towel? (yes/no): ").strip().lower()
             if action in {"yes", "y"}:
-                print(f"Numbers on it: {self.password}")
+                self.password_sheet.describe()
                 print("It bursts into flames.")
                 self.sheet_available = False
             elif action in {"no", "n"}:
@@ -37,6 +45,12 @@ class ToiletCellar(Room):
 
 
 class MachineRoom(Room):
+    def __init__(self, name, description, toilet_ref):
+        super().__init__(name, description)
+        # issue #43: Initialize machine room attributes
+        self.fixed = False
+        self.toilet = toilet_ref
+    
     def run_story(self, user_items):
         if self.fixed:
             print("The machines are running.")
@@ -54,6 +68,11 @@ class MachineRoom(Room):
             else:
                 print("Wrong password! I should get a new one.")
                 self.toilet.password = f"{random.randint(10000, 99999)}"
+                self.toilet.password_sheet = Item(
+                    "password sheet",
+                    f"A paper towel with numbers: {self.toilet.password}",
+                    movable=False
+                )
                 self.toilet.sheet_available = True
         else:
             print("Invalid format.")
@@ -64,14 +83,7 @@ class MachineRoom(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-# issue #44: Add password sheet attributes (easier to integrate into existing structure that way)
-toilet_cellar.password = f"{random.randint(10000, 99999)}"
-toilet_cellar.sheet_available = True
-
-machine_room = MachineRoom("machine room", "Large machines... they should be generating power.")
-# issue #43: Add machine room attributes
-machine_room.fixed = False
-machine_room.toilet = toilet_cellar
+machine_room = MachineRoom("machine room", "Large machines... they should be generating power.", toilet_cellar)
 
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
@@ -82,4 +94,4 @@ ALL_ROOMS = {
     "machine_room": machine_room
     # Add your room key-value pairs here:
     # "my_room_key": my_room
-}  
+}
