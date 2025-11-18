@@ -1,5 +1,6 @@
 from main_classes import CommandHandler, Item, Floor, Room, UI
-from zdd_rooms import ALL_ROOMS
+from zdd_rooms import ALL_ROOMS, ForgottenStudy
+from zdd_rooms import ArchiveWithSecret
 
 EXIT_COMMAND = "exit"
 
@@ -34,7 +35,9 @@ class ZDDAdventure:
 
         # Define rooms in each floor
         analog_book = Item("old book", "a real book made of paper", movable=True)
-        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        archive_room = ArchiveWithSecret("archive", "Old dusty records… The air smells like forgotten secrets.", analog_book)
+        forgotten_study = ForgottenStudy()
+        cellar.add_room("forgotten study", forgotten_study)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
 
