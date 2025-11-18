@@ -1,5 +1,5 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room, Item
+from main_classes import Room
 
 
 class ToiletCellar(Room):
@@ -25,12 +25,10 @@ class ServerRoom(Room):
 
         return user_items
     
-club_mate = Item("club mate", "A lukewarm caffeine beverage. Fuel for coding.", movable= True)
-
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-server_room = ServerRoom("server room", "A loud, cold room filled with blinking racks.", items_init = [club_mate])
+server_room = ServerRoom("server room", "A loud, cold room filled with blinking racks.")
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
 # my_room = MyRoom("room_name", "room_description")
