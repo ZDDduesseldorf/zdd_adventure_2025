@@ -21,6 +21,7 @@ class SecurityRoomSecondFloor(Room):
         print("You enter a warm and gloomy room. A huge screen glows on the wall.")
         print("In the room you find a console, a chair and a trashcan in the corner")
 
+        # Player can choose if they want to interact with items in the room or immediately try out to guess the answer.
         first_choice = input("Do you want to take a look around first? (y/n): ")
 
         if first_choice == "n":
@@ -28,12 +29,14 @@ class SecurityRoomSecondFloor(Room):
             print("Try to enter the correct color order.")
 
             input_order = []
+            # Only this combination gives access to security footage.
             correct_order = ["red", "green", "blue"]
 
             while True:
                 press_button = input("Press a button (green/blue/red): ")
 
                 if press_button in ["green", "blue", "red"]:
+                    # Adds the chosen color to the empty list.
                     input_order.append(press_button)
                 else:
                     print("Not a valid button. Try again.")
@@ -45,6 +48,7 @@ class SecurityRoomSecondFloor(Room):
 
                 if len(input_order) == 3 and input_order != correct_order:
                     print("Access denied: wrong passcode.")
+                    # If the answer is incorrect, the player will have to try again until they guess it right.
                     input_order = []
 
 
@@ -57,17 +61,20 @@ class SecurityRoomSecondFloor(Room):
                     user_items.append(paper_note)
                     print("You take it out. It says: First it's warm. In the end it's cold.")
                     print("Could this be a hint?")
+                
                 else:
                     sit = input("You decide to ignore the content of the paper sheet. You see an empty chair. Do you want to sit on it? (y/n): ")
                     if sit == "y":
                         print("You sit down. Nothing happens. Really, nothing.")
                         time.sleep(3)
                         print("Maybe you should do something...")
+            
             else:
                 print("You ignore the trashcan.")
 
             print("You go back to the console. Try to enter the correct color order.")
 
+            # Same principle as before, player has to guess the correct order.
             input_order = []
             correct_order = ["red", "green", "blue"]
 
