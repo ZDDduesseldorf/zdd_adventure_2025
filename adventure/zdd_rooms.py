@@ -1,6 +1,6 @@
 """This is to keep all special rooms of the ZDD."""
 from main_classes import Room
-
+from main_classes import Item
 
 class ToiletCellar(Room):
     def run_story(self, user_items):
@@ -19,6 +19,8 @@ class Basement51(Room):
         super().__init__(name, description, items_init)
         self.password = "2431"
         self.puzzle_solved = False
+        
+    
 
     def run_story(self, user_items):
         if self.visited == 1:
@@ -27,6 +29,7 @@ class Basement51(Room):
             print("A dusty terminal sits in the corner. Next to it: a locked metal locker.")
             print("Above everything, a faded sign reads: ROOM 51.")
             print("Below the sign: a locker with a numerical lock.\n")
+            
         return user_items
 
     def show_items(self, user_items):
@@ -60,7 +63,7 @@ class Basement51(Room):
                 self.play_text_beeps()
 
             elif action == "open":
-                self.try_open_locker()
+                user_items = self.try_open_locker(user_items)
 
             else:
                 print("That's not a valid action.")
@@ -73,13 +76,14 @@ class Basement51(Room):
             print("---")
         print()
 
-    def try_open_locker(self):
+    def try_open_locker(self,user_items):
         if self.puzzle_solved:
             print("The locker is already open.")
-            return
+            return user_items
 
         attempt = input("▶ Enter password: ").strip()
         if attempt == self.password:
+            logbook=Item("logbook","A old logbook with a message")
             print("\nThe lock clicks open!")
             print("Inside you find an old notebook with a faded message:")
             print("  04/12/2025 – Day 285")
@@ -87,10 +91,11 @@ class Basement51(Room):
             print("  If you're reading this, shut down the system and save our world!")
             print("\nSomeone tried… but clearly failed.\n")
             self.puzzle_solved = True
+            user_items.append(logbook)
         else:
             print("Incorrect password.")
             print("Maybe listening to the beeps will help...")
-
+        return user_items
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
