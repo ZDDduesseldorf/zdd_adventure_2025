@@ -112,6 +112,12 @@ class ZDDAdventure:
                 # Just loop to re-render the floor panel & orientation
                 continue
 
+            if "inspect" in action and "panel" in action and self.current_floor.name == "first floor":
+                print("You inspect a loose-looking wall panel. It slides open with a quiet hiss, revealing a dark room behind it!")
+                print("(hint) You can now 'enter vr_lab'.")
+                self.current_floor.add_room("vr_lab", ALL_ROOMS["vr_lab"])
+            continue
+
             # 5) Unknown command
             print(f"Unknown command! Type '{EXIT_COMMAND}' to stop the game or 'help' for help.")
 
