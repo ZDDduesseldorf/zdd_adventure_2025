@@ -33,8 +33,9 @@ class ZDDAdventure:
         third_floor.add_connection("down", second_floor)
 
         # Define rooms in each floor
+        chameleon_key = Item("chameleon key","A special key which can change its color like a Chameleon. You can move on and end the cycle of the endless room.",movable=True)
         analog_book = Item("old book", "a real book made of paper", movable=True)
-        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book,chameleon_key)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
 
