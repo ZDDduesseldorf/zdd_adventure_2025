@@ -34,7 +34,9 @@ class ZDDAdventure:
 
         # Define rooms in each floor
         analog_book = Item("old book", "a real book made of paper", movable=True)
-        archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        map_text = "An old map... it shows a hidden room in the cellar."
+        old_map = Item("old map", map_text, movable=True)
+        archive_room = Room("archive", "Old records...", [analog_book, old_map])
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
 
