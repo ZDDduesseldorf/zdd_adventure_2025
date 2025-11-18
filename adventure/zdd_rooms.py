@@ -1,5 +1,12 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room
+from main_classes import Room, Item
+
+# Defining the USB  Key
+usb_debug_key = Item(
+    name="USB Debug Key",
+    description="A small, rugged USB stick with a glowing blue edge. On the back someone has written: “Use only for internal testing. Not for production!”",
+    movable=True
+)
 
 
 class ToiletCellar(Room):
