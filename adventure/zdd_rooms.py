@@ -63,7 +63,7 @@ vr_lab_room = HiddenVRLab("Hidden VR-Lab", "An experimental and slightly chaotic
 # my_room = MyRoom("room_name", "room_description")
 
 ALL_ROOMS = {
-    "toilet_cellar": toilet_cellar
+    "toilet_cellar": toilet_cellar,
     # Add your room key-value pairs here:
     # "my_room_key": my_room
     "vr_lab": vr_lab_room
