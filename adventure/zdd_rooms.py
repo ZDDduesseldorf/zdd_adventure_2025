@@ -1,5 +1,5 @@
 """This is to keep all special rooms of the ZDD."""
-from main_classes import Room
+from main_classes import Room, Item
 
 
 class ToiletCellar(Room):
@@ -18,7 +18,7 @@ class SecurityRoom(Room):
     def __init__(self, name, description, exits=None):
         super().__init__(name, description, exits)
         self.current_cam = 1
-        self.keycard_found = False 
+        self.keycard_found = False
 
     def run_story(self, user_items):
         print("You step into the Security Room. Several monitors glow faintly in the dark.")
@@ -28,13 +28,20 @@ class SecurityRoom(Room):
     def show_items(self, user_items):
         print("You approach the security console and stand in front of the monitor wall.")
         self._print_current_cam()
+        saw_code = False
         while True:
             cmd = input(">> Type 'up' or 'down' to switch cameras, or 'back' to stop inspecting: ").strip().lower()
 
             if cmd in {"up", "down"}:
                 self.change_cameras(cmd)
+                if self.current_cam == 2:
+                    saw_code = True
             elif cmd in {"back", "leave", "exit"}:
                 print("You step back from the monitors.")
+
+                if saw_code and not self.keycard_found:
+                    self.try_unlock(user_items)
+                
                 return user_items
             else:
                 print("Unknown command. Use 'up', 'down', or 'back'.")
@@ -54,14 +61,26 @@ class SecurityRoom(Room):
             print(f"CAM 2 → A whiteboard comes into view. A code is written on it: '{self.secret_code}'.")
         elif self.current_cam == 3:
             print("CAM 3 → Another corridor. Empty and silent.")
+    
+    def try_unlock(self, user_items):
+        print("\nA small console blinks under the monitors. It asks for a 4-digit code.")
+
+        attempt = input("Enter the code: ").strip()
+        if attempt == self.secret_code:
+            print("The console beeps softly. A hidden compartment slides open.")
+            print("Inside you find a keycard.")
+            user_items.append(keycard)
+            self.keycard_found = True
+        else:
+            print ("The console flashes red. Incorrect code.")
+        return user_items
 
 
-
-
+keycard = Item("keycard", "A magnetic card granting access to restricted areas.", movable=True)
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-securityroom_first = SecurityRoom("security room", "This the total secret room")
+securityroom_first = SecurityRoom("security room", "This is the total secret room")
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
 # my_room = MyRoom("room_name", "room_description")
