@@ -39,11 +39,13 @@ class ZDDAdventure:
         water_dispenser_room = Room("water dispenser", "A small area on the second floor with a cold water dispenser.", water_bottle)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
-        second_floor.add_room("water_dispenser", water_dispenser_room)
+        
         
 
         # -------------------------------
         # ... Add other rooms ...
+        second_floor.add_room("water_dispenser", water_dispenser_room)
+        first_floor.add_room("scent_lab", ALL_ROOMS["scent_lab"])
 
         return {
             "cellar": cellar,
