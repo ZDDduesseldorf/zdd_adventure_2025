@@ -89,7 +89,7 @@ toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
 forgotten_study = ForgottenStudy()
 
 ALL_ROOMS = {
-    "toilet_cellar": toilet_cellar
+    "toilet_cellar": toilet_cellar,
     # Add your room key-value pairs here:
     "study": forgotten_study
 }
