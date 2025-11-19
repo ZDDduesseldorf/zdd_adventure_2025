@@ -13,28 +13,36 @@ class ToiletCellar(Room):
             return [x for x in user_items if x.name != "old book"]
         return user_items
 
-class Scentlab(Room):
+class CardioCenter(Room):
     def run_story(self, user_items):
-        if self.visited == 1:
-            print("You walk into the Scentlab...What an interesting room, you think to yourself.")
-            print("Suddenly, a diffuser sprays a mysterious scent into the room!")
-            print("As the mist settles, you notice a shimmering pink perfume bottle on the floor.")
+        print("You enter the Cardio Center on the second floor.")
+        print("A bright fitness room with a bike, rowing machine, and treadmill.")
+        print('A wall display reads: "Challenge available only with wearable!"')
+        print()
 
-            perfume = Item(
-                name="experimental perfume bottle",
-                description="A shimmering pink perfume bottle. The scent keeps shifting.",
-                movable=True
-            )
-            self.items.append(perfume)
+        has_tracker = "Fitness Tracker" in [x.name for x in user_items]
 
-        else:
-            print()
+        if not has_tracker:
+            print("You walk toward the display...")
+            print("It flashes red: 'No wearable detected. Try again with the proper item.'")
+            print("You notice something lying on a towel beside the treadmill.")
+            print("It's a Fitness Tracker! Maybe you should pick it up.")
+            return user_items
+
+        print("Your Fitness Tracker vibrates.")
+        print("The display lights up: 'Start challenge? (yes/no)'")
+        choice = input("> ").strip().lower()
+        if choice != "yes":
+            print("You decide to skip the cardio challenge for now.")
+            return user_items
+
+        print("\nYou begin the cardio challenge...")
+        print("Bike → Rowing → Treadmill ... your pulse rises.")
+        print("'CHALLENGE COMPLETED!' flashes on the display.")
+
+        print("\nA Fitness Card drops out!")
+        user_items.append(FitnessCard())
         return user_items
-    
-    def enter_room(self, user_items, command_handler):
-        self.visited += 1
-        print("You step into the Scentlab.")
-        user_items = self.run_story(user_items)
 
         while True:
             action = input(">> smell perfumes / inspect shelves / inspect perfume / leave: ").strip().lower()
@@ -68,9 +76,15 @@ class Scentlab(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
+cardio_center = CardioCenter(
+    "cardio_center",
+    "Second floor — Sports and Wellness Area, glass door marked 'Cardio Center'."
+)
+# -----------------------------------------------------------
+# Add YOUR ROOM instance here, similar to the example below:
+# my_room = MyRoom("room_name", "room_description")
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
-    "scent_lab": scent_lab
+    "cardio_center": cardio_center
 }
