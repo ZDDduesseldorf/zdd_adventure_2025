@@ -62,6 +62,7 @@ class ZDDAdventure:
         # 3. Den Raum dem 1. Stock hinzufügen
         first_floor.add_room("lab", lab_room)
         # -------------------------------------------------------
+        first_floor.add_room("scent lab", ALL_ROOMS["scent_lab"])
 
         return {
             "cellar": cellar,
