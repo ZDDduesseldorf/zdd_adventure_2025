@@ -41,6 +41,7 @@ class ZDDAdventure:
 
         # -------------------------------
         # ... Add other rooms ...
+        first_floor.add_room("scent lab", ALL_ROOMS["scent_lab"])
 
         return {
             "cellar": cellar,
