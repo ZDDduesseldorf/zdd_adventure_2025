@@ -1,6 +1,29 @@
 """This is to keep all special rooms of the ZDD."""
+from main_classes import Room
 from main_classes import Room, Item
 
+class FitnessTracker(Item):
+    def __init__(self):
+        super().__init__(
+            name="Fitness Tracker",
+            location="cardio_center",
+            description=(
+                "A smart watch that tracks steps, speed, and pulse. "
+                "Its display reads: 'Ready for your next workout?'\n"
+                "Lying on a towel beside the treadmill with a note: 'Essential for cardio challenges!'"
+            )
+        )
+
+class FitnessCard(Item):
+    def __init__(self):
+        super().__init__(
+            name="Fitness Card",
+            location="reward",
+            description=(
+                "A special card awarded for completing the Cardio Room challenge. "
+                "It unlocks sports-related areas for future events."
+            )
+        )
 
 class ToiletCellar(Room):
     def run_story(self, user_items):
@@ -13,28 +36,38 @@ class ToiletCellar(Room):
             return [x for x in user_items if x.name != "old book"]
         return user_items
 
-class Scentlab(Room):
+class CardioCenter(Room):
     def run_story(self, user_items):
-        if self.visited == 1:
-            print("You walk into the Scentlab...What an interesting room, you think to yourself.")
-            print("Suddenly, a diffuser sprays a mysterious scent into the room!")
-            print("As the mist settles, you notice a shimmering pink perfume bottle on the floor.")
+        print("You enter the Cardio Center on the second floor.")
+        print("A bright fitness room with a bike, rowing machine, and treadmill.")
+        print('A wall display reads: "Challenge available only with wearable!"\n')
 
-            perfume = Item(
-                name="experimental perfume bottle",
-                description="A shimmering pink perfume bottle. The scent keeps shifting.",
-                movable=True
-            )
-            self.items.append(perfume)
+        # Prüfen, ob Spieler den Tracker hat
+        has_tracker = "Fitness Tracker" in [x.name for x in user_items]
 
-        else:
-            print()
+        if not has_tracker:
+            print("On a towel beside the treadmill, you see a small device.")
+            print("A note beside it reads: 'Essential for cardio challenges!'")
+            print("You found a Fitness Tracker! Type 'take tracker' to pick it up.\n")
+            print("The wall display flashes red: 'No wearable detected. Try again with the proper item.'")
+            return user_items
+
+        # Spieler hat Tracker → Challenge starten
+        print("The display detects your Fitness Tracker!")
+        print("It lights up: 'Start Challenge? (yes/no)'")
+        choice = input("> ").strip().lower()
+        if choice != "yes":
+            print("You decide to skip the cardio challenge for now.")
+            return user_items
+
+        print("\nYou begin the cardio challenge...")
+        print("Bike → Rowing Machine → Treadmill ... your pulse rises.")
+        print("After an intense workout, the screen flashes: 'CHALLENGE COMPLETED!'")
+
+        print("\nA Fitness Card drops out of a small slot!")
+        user_items.append(FitnessCard())
+
         return user_items
-    
-    def enter_room(self, user_items, command_handler):
-        self.visited += 1
-        print("You step into the Scentlab.")
-        user_items = self.run_story(user_items)
 
         while True:
             action = input(">> smell perfumes / inspect shelves / inspect perfume / leave: ").strip().lower()
@@ -68,9 +101,17 @@ class Scentlab(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
+cardio_center = CardioCenter(
+    "cardio_center",
+    "Second floor — Sports and Wellness Area, glass door marked 'Cardio Center'."
+)
+
+# -----------------------------------------------------------
+# Add YOUR ROOM instance here, similar to the example below:
+# my_room = MyRoom("room_name", "room_description")
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
-    "scent_lab": scent_lab
+    "cardio_center": cardio_center# Add your room key-value pairs here:
+    # "my_room_key": my_room
 }
