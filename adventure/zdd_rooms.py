@@ -86,10 +86,10 @@ toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
 
 # -----------------------------------------------------------
 # Add YOUR ROOM instance here, similar to the example below:
-# my_room = MyRoom("room_name", "room_description")
+forgotten_study = ForgottenStudy()
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar
     # Add your room key-value pairs here:
-    # "my_room_key": my_room
+    "study": forgotten_study
 }
