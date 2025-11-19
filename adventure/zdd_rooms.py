@@ -160,6 +160,39 @@ def play():
 if __name__ == "__main__":
     play()
 
+class StressBall:
+    def __init__(self):
+        self.name = "Stress Ball"
+        self.description = "Ein kleiner, zusammendrückbarer Stressball."
+        self.movable = True
+        self.in_inventory = False
+
+    def pick_up(self):
+        if not self.in_inventory:
+            self.in_inventory = True
+            print(f"{self.name} wurde aufgenommen und dem Inventar hinzugefügt.")
+        else:
+            print(f"{self.name} ist bereits im Inventar.")
+
+    def use(self):
+        if self.in_inventory:
+            print("Du drückst den Stressball und fühlst dich entspannter.")
+        else:
+            print(f"Du musst den {self.name} zuerst aufnehmen, bevor du ihn benutzen kannst.")
+
+def interact():
+    stress_ball = StressBall()
+    print("Du findest einen kleinen Stressball. Möchtest du ihn aufnehmen? (ja/nein)")
+    choice = input().lower()
+    if choice == "ja":
+        stress_ball.pick_up()
+        stress_ball.use()
+    else:
+        print("Du hast den Stressball nicht aufgenommen.")
+
+
+if __name__ == "__main__":
+    interact()
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
