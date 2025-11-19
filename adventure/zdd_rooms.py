@@ -64,34 +64,7 @@ class Scentlab(Room):
             else: 
                 print("Unknown Command.")
 
-class OfficeHulinski(Room):
-    def run_story(self, user_items):
-        print("You enter Hulinski's office, filled with books and papers that seem to be exams.")
-        print("The semmingly annoyed Hulinski sits behind his desk and mubles: 'Where is that darn red pen! Without it, I cannot faile these idi- i mean beloved students.' .")
-        return user_items
-    
-    def enter_room(self, user_items, command_handler):
-        self.visited += 1
-        user_items = self.run_story(user_items)
 
-        while True:
-            action = input(">> talk to Hulinski / inspect desk / leave: ").strip().lower()
-            if command_handler.handle_global_commands(action):
-                return user_items
-            if action == "leave":
-                print("You leave Hulinski's office.")
-                return user_items
-            elif action == "talk to Hulinski":
-                print("Do you have my red pen? I can't grade without it!")
-                if "red pen" in user_items:
-                    print("Oh, you have it! Thank you so much! ... this is your best friend? Damn ... I will nonetheless fail him .")
-                else:
-                    print("Du hast keinen roten Stift.")
-            elif action == "inspect desk":
-                print("You see the exam of zour best friend and know he is cooked.")
-            else:
-                print("Unknown Command.")
-            
         
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
