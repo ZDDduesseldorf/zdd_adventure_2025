@@ -20,8 +20,7 @@ class ZDDAdventure:
         first_floor = Floor("first floor", "There are many doors. Study rooms, offices, and labs.")
         second_floor = Floor("second floor", "This floor hosts the professors' offices and some research labs.")
         third_floor = Floor("third floor", "This is the topmost floor with the lecture hall and a meeting room. You have heard about a roof terrace, but that might just be stories...")
-        # roof_floor = Floor("roof", "You really shouldn't be here!!!")
-
+        
         # Connect floors
         cellar.add_connection("up", ground_floor)
         ground_floor.add_connection("down", cellar)
@@ -32,11 +31,37 @@ class ZDDAdventure:
         second_floor.add_connection("up", third_floor)
         third_floor.add_connection("down", second_floor)
 
+        # --- ISSUE #97: Add the Roof Terrace to the 3rd floor ---
+        # Der Raum selbst wird aus zdd_rooms.py geladen
+        if "terrace" in ALL_ROOMS:
+            third_floor.add_room("terrace", ALL_ROOMS["terrace"])
+
+
         # Define rooms in each floor
+        # (Standard Item im Keller)
         analog_book = Item("old book", "a real book made of paper", movable=True)
         archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
+
+        # --- ISSUE #98: Add Keycard and Lab to the 1st floor ---
+        # 1. Das Item erstellen
+        keycard = Item(
+            name="keycard", 
+            description="A plastic card with the ZDD logo and 'Staff only' printed on it.", 
+            movable=True
+        )
+        
+        # 2. Den Raum erstellen (Lab), wo die Karte liegt
+        lab_room = Room(
+            name="lab", 
+            description="A messy computer lab with blinking servers.", 
+            items_init=[keycard]
+        )
+        
+        # 3. Den Raum dem 1. Stock hinzufügen
+        first_floor.add_room("lab", lab_room)
+        # -------------------------------------------------------
         first_floor.add_room("scent lab", ALL_ROOMS["scent_lab"])
 
         return {

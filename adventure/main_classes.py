@@ -397,4 +397,3 @@ class Floor:
             for direction, floor in self.connected_floors.items():
                 details += f"\nType 'go {direction}' to go to {floor.name}."
         return details
-

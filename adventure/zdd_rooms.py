@@ -1,7 +1,6 @@
 """This is to keep all special rooms of the ZDD."""
 from main_classes import Room, Item
 
-
 class ToiletCellar(Room):
     def run_story(self, user_items):
         print("What did you expect? It's a toilet.")
@@ -11,6 +10,14 @@ class ToiletCellar(Room):
             print("You decide that it wasn't that important after all.")
             # Remove book from inventory
             return [x for x in user_items if x.name != "old book"]
+        return user_items
+
+
+class RoofTerrace(Room):
+    def run_story(self, user_items):
+        print("A cold wind hits your face.")
+        print("You can see the lights of Düsseldorf shimmering in the distance.")
+        print("It feels a bit lonely up here, but the view is amazing.")
         return user_items
 
 class Scentlab(Room):
@@ -68,9 +75,13 @@ class Scentlab(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
+
+# Instanz für die Terrasse erstellen
+roof_terrace = RoofTerrace("terrace", "An open roof terrace with a view over the city at night.")
 scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
+    "terrace": roof_terrace,
     "scent_lab": scent_lab
 }
