@@ -123,9 +123,9 @@ class Scentlab(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
+
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
-    "scent_lab": scent_lab
+    
 }
