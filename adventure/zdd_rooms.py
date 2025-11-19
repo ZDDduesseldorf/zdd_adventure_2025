@@ -12,6 +12,29 @@ class ToiletCellar(Room):
             # Remove book from inventory
             return [x for x in user_items if x.name != "old book"]
         return user_items
+class YourRoom(Room):
+    def run_story(self, user_items):
+        print("You enter your room. It's calm... but something feels off.")
+
+        if "laptop" in [x.name for x in user_items]:
+            print("Your laptop suddenly lights up in your backpack.")
+            print("A huge wall of unfinished tasks appears on the screen.")
+            print("The stress hits you instantly... it's overwhelming.")
+
+            action = input("Do you want to smash the laptop out of frustration? (yes/no): ").strip().lower()
+
+            if action == "yes":
+                print("You slam the laptop on the ground. The screen shatters into pieces.")
+                print("Strangely enough... you feel a bit better.")
+                return [x for x in user_items if x.name != "laptop"]
+
+            print("You hold yourself back and close the laptop.")
+            print("You're stressed... but proud of your self-control.")
+            return user_items
+
+        else:
+            print("You look around. Without your laptop, the room feels strangely quiet.")
+            return user_items
 
 class Scentlab(Room):
     def run_story(self, user_items):
@@ -67,10 +90,18 @@ class Scentlab(Room):
         
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
-toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
-scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
 
+toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
+
+scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
+your_room = YourRoom(
+    "your_room",
+    "This is your personal space ... you are not alone, work is waiting for you."
+)
+scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
+    "your_room": your_room,
     "scent_lab": scent_lab
 }
+
