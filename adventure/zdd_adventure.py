@@ -40,9 +40,7 @@ class ZDDAdventure:
         hallway_to_your_room = Room("hallway","The hallway in front of your personal room.",items_init=[laptop],)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
-
-        # -------------------------------
-        # ... Add other rooms ...
+        first_floor.add_room("scent lab", ALL_ROOMS["scent_lab"])
 
         third_floor.add_room("hallway_to_your_room", hallway_to_your_room)
         third_floor.add_room("your_room",ALL_ROOMS["your_room"])
