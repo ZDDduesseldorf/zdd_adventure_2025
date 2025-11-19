@@ -63,7 +63,8 @@ class Scentlab(Room):
                                 print("You decided to leave the perfume bottle.")
             else: 
                 print("Unknown Command.")
-            
+
+
         
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
