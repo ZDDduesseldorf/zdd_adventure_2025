@@ -1,7 +1,6 @@
 """This is to keep all special rooms of the ZDD."""
 from main_classes import Room
 
-
 class ToiletCellar(Room):
     def run_story(self, user_items):
         print("What did you expect? It's a toilet.")
@@ -13,17 +12,23 @@ class ToiletCellar(Room):
             return [x for x in user_items if x.name != "old book"]
         return user_items
 
+# Issue #97 Roof Terrace ---
+class RoofTerrace(Room):
+    def run_story(self, user_items):
+        print("A cold wind hits your face.")
+        print("You can see the lights of Düsseldorf shimmering in the distance.")
+        print("It feels a bit lonely up here, but the view is amazing.")
+        return user_items
+
 
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
 
-# -----------------------------------------------------------
-# Add YOUR ROOM instance here, similar to the example below:
-# my_room = MyRoom("room_name", "room_description")
+# Instanz für die Terrasse erstellen
+roof_terrace = RoofTerrace("terrace", "An open roof terrace with a view over the city at night.")
 
 ALL_ROOMS = {
-    "toilet_cellar": toilet_cellar
-    # Add your room key-value pairs here:
-    # "my_room_key": my_room
+    "toilet_cellar": toilet_cellar,
+    "terrace": roof_terrace  # 
 }
