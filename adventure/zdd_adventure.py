@@ -40,7 +40,7 @@ class ZDDAdventure:
         cellar.add_room("forgotten study", forgotten_study)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
-
+        cellar.add_room("study", ALL_ROOMS["study"])
         # -------------------------------
         # ... Add other rooms ...
 
