@@ -13,6 +13,39 @@ class ToiletCellar(Room):
             return [x for x in user_items if x.name != "old book"]
         return user_items
 
+
+class GamingLounge(Room):
+    def run_story(self, user_items):
+        print("Wow, it's a gaming lounge with a huge TV in the corner!")
+        # Check if the user has the switch in their inventory; If switch is present start playing a game.
+        if "Nintendo Switch" in [x.name for x in user_items]:
+            user_input = input("You have a switch in your inventory. Do you want to play a game?: (y/n) ")
+            if user_input.lower() == "y":
+                play = True
+                # Loop over the game as long as the player answers "y"
+                while play:
+                    print("You go to the TV, connect your Nintendo Switch and start playing.")
+                    print("This game is super fun! but in the back of your mind, you can’t stop thinking about the portfolio assignment…”)")
+                    new_input = input("Do you want to continue playing?: (y/n) ")
+                    if new_input.lower() == "y":
+                        continue
+                    elif new_input.lower() == "n":
+                        play = False
+                    else:
+                        print("You're unsure and think again. (Answer 'y' or 'n')")
+                        
+            elif user_input.lower() == "n":
+                    print("You decide that you don't have time to play right now.")
+                    
+            else:
+                print("You're unsure and think again. (Answer 'y' or 'n')")
+        return user_items
+
+                    
+                
+        
+        
+=======
 class Scentlab(Room):
     def run_story(self, user_items):
         if self.visited == 1:
@@ -68,9 +101,18 @@ class Scentlab(Room):
 # -----------------------------------------------------------
 # ------------------- List here all rooms -------------------
 toilet_cellar = ToiletCellar("toilet", "Yes, even the cellar has a toilet.")
+
+gaming_lounge = GamingLounge("Gaming Lounge", "There's a TV but no gaming console...")
 scent_lab = Scentlab("Scent Lab", "A small lab filled with glowing perfume bottles and mysterious scents.")
+
+# -----------------------------------------------------------
+# Add YOUR ROOM instance here, similar to the example below:
+# my_room = MyRoom("room_name", "room_description")
 
 ALL_ROOMS = {
     "toilet_cellar": toilet_cellar,
+    # Add your room key-value pairs here:
+    # "my_room_key": my_room
+    "gaming_lounge": gaming_lounge
     "scent_lab": scent_lab
 }
