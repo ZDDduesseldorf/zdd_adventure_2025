@@ -35,10 +35,18 @@ class ZDDAdventure:
         # Define rooms in each floor
         analog_book = Item("old book", "a real book made of paper", movable=True)
         archive_room = Room("archive", "Old records and dusty books everywhere.", analog_book)
+        water_bottle = Item("water bottle", "A refreshing cold bottle from the dispenser.", movable=True)
+        water_dispenser_room = Room("water dispenser", "A small area on the second floor with a cold water dispenser.", water_bottle)
         cellar.add_room("archive", archive_room)
         cellar.add_room("toilet", ALL_ROOMS["toilet_cellar"])
-        first_floor.add_room("scent lab", ALL_ROOMS["scent_lab"])
+        
+        
 
+        # -------------------------------
+        # ... Add other rooms ...
+        second_floor.add_room("water_dispenser", water_dispenser_room)
+        first_floor.add_room("scent_lab", ALL_ROOMS["scent_lab"])
+        
         return {
             "cellar": cellar,
             "ground floor": ground_floor,
